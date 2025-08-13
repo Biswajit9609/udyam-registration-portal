@@ -1,0 +1,137 @@
+{
+  "step1": {
+    "title": "Aadhaar Number Validation",
+    "fields": [
+      {
+        "label": "Aadhaar Number",
+        "name": "ctl00$ContentPlaceHolder1$txtadharno",
+        "id": "ctl00_ContentPlaceHolder1_txtadharno",
+        "type": "text",
+        "maxLength": 12,
+        "placeholder": "Your Aadhaar No",
+        "validation": {
+          "required": true,
+          "isNumber": true,
+          "minLength": 12,
+          "maxLength": 12
+        }
+      },
+      {
+        "label": "Name of Entrepreneur",
+        "name": "ctl00$ContentPlaceHolder1$txtownername",
+        "id": "ctl00_ContentPlaceHolder1_txtownername",
+        "type": "text",
+        "maxLength": 100,
+        "placeholder": "Name as per Aadhaar",
+        "validation": {
+          "required": true
+        }
+      },
+      {
+        "label": "Validate & Generate OTP",
+        "id": "ctl00_ContentPlaceHolder1_btnValidateAadhaar",
+        "type": "button",
+        "action": "generate_otp"
+      },
+      {
+        "label": "OTP",
+        "name": "ctl00$ContentPlaceHolder1$txtOtp1",
+        "id": "ctl00_ContentPlaceHolder1_txtOtp1",
+        "type": "text",
+        "maxLength": 6,
+        "placeholder": "OTP code",
+        "validation": {
+          "required": true,
+          "isNumber": true,
+          "minLength": 6,
+          "maxLength": 6
+        },
+        "condition": {
+          "action": "generate_otp"
+        }
+      },
+      {
+        "label": "Validate OTP",
+        "name": "ctl00$ContentPlaceHolder1$btnValidate",
+        "id": "ctl00_ContentPlaceHolder1_btnValidate",
+        "type": "button",
+        "action": "validate_otp"
+      }
+    ]
+  },
+  "step2": {
+    "title": "PAN Validation",
+    "fields": [
+      {
+        "label": "Type of Organisation",
+        "name": "ctl00$ContentPlaceHolder1$ddlTypeofOrg",
+        "id": "ctl00_ContentPlaceHolder1_ddlTypeofOrg",
+        "type": "dropdown",
+        "options": [
+          "Proprietary",
+          "Partnership",
+          "Co-Operative",
+          "Private Limited Company",
+          "Public Limited Company",
+          "Self Help Group",
+          "Limited Liability Partnership",
+          "Society/Club/Trust",
+          "Other"
+        ],
+        "validation": {
+          "required": true
+        }
+      },
+      {
+        "label": "PAN",
+        "name": "ctl00$ContentPlaceHolder1$txtPan",
+        "id": "ctl00_ContentPlaceHolder1_txtPan",
+        "type": "text",
+        "maxLength": 10,
+        "placeholder": "Enter Pan Number",
+        "validation": {
+          "required": true,
+          "pattern": "[A-Z]{5}[0-9]{4}[A-Z]{1}"
+        }
+      },
+      {
+        "label": "Name as per PAN",
+        "name": "ctl00$ContentPlaceHolder1$txtPanName",
+        "id": "ctl00_ContentPlaceHolder1_txtPanName",
+        "type": "text",
+        "maxLength": 100,
+        "placeholder": "Name as per PAN",
+        "validation": {
+          "required": true
+        }
+      },
+      {
+        "label": "Date of Birth",
+        "name": "ctl00$ContentPlaceHolder1$txtdob",
+        "id": "ctl00_ContentPlaceHolder1_txtdob",
+        "type": "text",
+        "placeholder": "DD/MM/YYYY",
+        "validation": {
+          "required": true,
+          "isDate": true
+        }
+      },
+      {
+        "label": "I agree to the terms and conditions.",
+        "name": "ctl00$ContentPlaceHolder1$chkDecarationP",
+        "id": "ctl00_ContentPlaceHolder1_chkDecarationP",
+        "type": "checkbox",
+        "validation": {
+          "required": true
+        }
+      },
+      {
+        "label": "PAN Validate",
+        "name": "ctl00$ContentPlaceHolder1$btnValidatePan",
+        "id": "ctl00_ContentPlaceHolder1_btnValidatePan",
+        "type": "button",
+        "action": "validate_pan"
+      }
+    ]
+  }
+}

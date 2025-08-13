@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // This output path is a common convention for serverless environments.
+  // You can adjust it if your project structure is different.
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Defines the table that will store the form submissions.
+model Submission {
+  // A unique ID for each submission, automatically generated.
+  id        Int      @id @default(autoincrement())
+  // The timestamp when the submission was created.
+  createdAt DateTime @default(now())
+
+  // --- Fields from your form ---
+
+  // Stores the 12-digit Aadhaar number. It must be unique.
+  aadhaarNumber    String   @unique
+  // Stores the name of the entrepreneur.
+  entrepreneurName String
+  // Stores the selected "Type of Organisation" from the dropdown.
+  organisationType String
+  // Stores the 10-character PAN number. It must be unique.
+  panNumber        String   @unique
+}
