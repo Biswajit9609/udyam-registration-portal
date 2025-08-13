@@ -1,69 +1,164 @@
-# React + TypeScript + Vite
+# Udyam Registration Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React-based clone of the official Udyam Registration form with multi-step validation and responsive design.
 
-Currently, two official plugins are available:
+🌐 **Live Demo:** [https://udyam-registration-portal-indol.vercel.app/](https://udyam-registration-portal-indol.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- ✅ Multi-step form with Aadhaar and PAN validation
+- ⚡ Real-time form validation with error handling
+- 📱 Fully responsive design with Tailwind CSS
+- 🔒 TypeScript for type safety
+- 🗄️ PostgreSQL database integration
+- 🎨 Modern UI matching government portal design
+- 📊 Progress tracking with visual indicators
+- 🔐 OTP verification simulation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Frontend:**
+- React 18 + TypeScript
+- Vite (Build tool)
+- Tailwind CSS (Styling)
+- React Testing Library (Testing)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+**Backend:**
+- Node.js + Express
+- Prisma ORM
+- PostgreSQL Database
+- CORS enabled for cross-origin requests
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
+
+```
+├── src/
+│   ├── components/
+│   │   ├── UdyamForm.tsx      # Main form component
+│   │   └── UdyamForm.test.tsx # Test file
+│   ├── assets/                # Images and static files
+│   └── App.tsx               # Root component
+├── server/
+│   ├── index.js              # Express server
+│   ├── prisma/               # Database schema
+│   └── package.json          # Backend dependencies
+└── package.json              # Frontend dependencies
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Quick Start
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
+- Node.js 18+
+- PostgreSQL database
+- Git
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Frontend Setup
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd udyam-registration-portal
+
+# Install dependencies
+npm install
+
+# Create environment file
+cp .env.example .env
+
+# Start development server
+npm run dev
 ```
+
+### Backend Setup
+```bash
+# Navigate to server directory
+cd server
+
+# Install dependencies
+npm install
+
+# Create environment file
+cp .env.example .env
+
+# Setup database
+npx prisma migrate dev
+
+# Start server
+npm run dev
+```
+
+## Environment Variables
+
+### Frontend (.env)
+```env
+VITE_API_URL=http://localhost:3001
+# For production: https://udyam-registration-portal.railway.internal
+```
+
+### Backend (server/.env)
+```env
+DATABASE_URL="postgresql://username:password@localhost:5432/udyam_db"
+FRONTEND_URL="http://localhost:5173"
+# For production: https://udyam-registration-portal-indol.vercel.app
+PORT=3001
+```
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/submit` | Submit form data |
+
+## Database Schema
+
+```sql
+model Submission {
+  id               Int     @id @default(autoincrement())
+  aadhaarNumber    String  @unique
+  entrepreneurName String
+  organisationType String
+  panNumber        String  @unique
+  createdAt        DateTime @default(now())
+}
+```
+
+## Deployment
+
+### Frontend (Vercel)
+- **URL:** [https://udyam-registration-portal-indol.vercel.app/](https://udyam-registration-portal-indol.vercel.app/)
+- **Platform:** Vercel
+- **Build Command:** `npm run build`
+- **Environment Variables:** `VITE_API_URL`
+
+### Backend (Railway)
+- **URL:** udyam-registration-portal.railway.internal
+- **Platform:** Railway
+- **Start Command:** `node index.js`
+- **Environment Variables:** `DATABASE_URL`, `FRONTEND_URL`, `PORT`
+
+## Testing
+
+```bash
+# Run tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Original Udyam Registration Portal design
+- Ministry of MSME, Government of India
+- React and TypeScript communities
